@@ -7,7 +7,7 @@
 #define Time_Delay 80
 
 
-bool State_G_Y_R[3] = {LOW, LOW, LOW};
+bool State_G_Y_R[3] = {LOW, LOW, LOW};=
 bool stateButton[3] = {LOW, HIGH, HIGH};
 bool WatchBTN[3];
 bool State[3] = {LOW, HIGH, HIGH};
