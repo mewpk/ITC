@@ -383,7 +383,7 @@ void loop() {
 
     // Player paddle
     OLED.drawFastVLine(PLAYER_X, player_y, PADDLE_HEIGHT, BLACK);
-    if (up_state) {
+    if (up_state && player_y > 1) {
       player_y -= 1;
     }
     if (down_state) {
@@ -391,21 +391,21 @@ void loop() {
     }
     up_state = down_state = false;
     if (player_y < 1) player_y = 1;
-    if (player_y + PADDLE_HEIGHT > 31) player_y = 31 - PADDLE_HEIGHT;
+    if (player_y + PADDLE_HEIGHT >= 31) player_y = 30 - PADDLE_HEIGHT;
     OLED.drawFastVLine(PLAYER_X, player_y, PADDLE_HEIGHT, WHITE);
 
     //--------------------------------PLayer 2 -----------------------------------//
     OLED.drawFastVLine(PLAYER2_X, player2_y, PADDLE_HEIGHT, BLACK);
-    if (up2_state) {
+    if (up2_state && player2_y > 1) {
       player2_y -= 1;
     }
-    if (down2_state) {
+    if (down2_state ) {
       player2_y += 1;
     }
     up2_state = down2_state = false;
 
     if (player2_y < 1) player2_y = 1;
-    if (player2_y + PADDLE_HEIGHT > 31) player2_y = 31 - PADDLE_HEIGHT;
+    if (player2_y + PADDLE_HEIGHT >= 31) player2_y = 30 - PADDLE_HEIGHT;
     OLED.drawFastVLine(PLAYER2_X, player2_y, PADDLE_HEIGHT, WHITE);
 
     update = true;
