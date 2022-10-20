@@ -26,19 +26,20 @@ typedef const struct State SType;
 
 SType FSM[10] = {
   { B10110011, 2000, { goW, waitW, waitW, waitW, goW, waitW, waitW, waitW } },  // goW
-  { B10110101, 300, { waitW, goD, goS, goS, waitW, goD, goS, goS } },           //waitW
+  { B10110101, 250, { goW, goD, goS, goS, goW, goD, goS, goS } },               //waitW
   { B10011110, 2000, { goS, waitS, goS, waitS, waitS, waitS, waitS, waitS } },  // goS
-  { B10101110, 300, { waitS, goD, waitS, goD, goW, goD, goW, goD } },           //waitS
+  { B10101110, 250, { goS, goD, goS, goD, goW, goD, goW, goD } },               //waitS
   { B01110110, 2000, { goD, goD, b1, b1, b1, b1, b1, b1 } },                    //goD
-  { B11110110, 300, { b2, b2, b2, b2, b2, b2, b2, b2 } },                       //b1
-  { B01110110, 300, { b3, b3, b3, b3, b3, b3, b3, b3 } },                       //b2
-  { B11110110, 300, { b4, b4, b4, b4, b4, b4, b4, b4 } },                       //b3
-  { B01110110, 300, { b5, b5, b5, b5, b5, b5, b5, b5 } },                       //b4
-  { B11110110, 300, { goD, goD, goS, goS, goW, goW, goW, goW } }                //b5
+  { B11110110, 100, { b2, b2, b2, b2, b2, b2, b2, b2 } },                       //b1
+  { B01110110, 100, { b3, b3, b3, b3, b3, b3, b3, b3 } },                       //b2
+  { B11110110, 100, { b4, b4, b4, b4, b4, b4, b4, b4 } },                       //b3
+  { B01110110, 100, { b5, b5, b5, b5, b5, b5, b5, b5 } },                       //b4
+  { B11110110, 100, { goD, goD, goS, goS, goW, goW, goW, goW } }                //b5
 
 };
 
 unsigned long S = 0;
+int state;
 
 int input, input1, input2, input3;
 
@@ -76,8 +77,15 @@ void traffic() {
   input2 = digitalRead(BTN[1]);
   input3 = digitalRead(BTN[2]);
   input = input1 * 4 + input2 * 2 + input3;
+  if (input == 0) {
+    S = FSM[S].Next[state];
+  } else {
+
+    state = input;
+    S = FSM[S].Next[state];
+  }
+
   Serial.println(input);
-  S = FSM[S].Next[input];
 }
 
 void setup() {
