@@ -1,9 +1,9 @@
 //-----------------------Slave-------------------------//
 
 #include <Wire.h>
-#define MY_ADDR 8
+#define MY_ADDR 9
 char empty[10] = "Token#0#";
-char format[10] = "Token#1#1#";
+char format[10] = "Token#1#2#";
 
 
 char messageR[300];
@@ -77,7 +77,7 @@ void getChar() {
 
 
 void showMessage() {
-  if (messageR[6] == '1' && messageR[8] == '1') {
+  if (messageR[6] == '1' && messageR[8] == '2') {
     for (int i = 10; i <= lenMessage; i++) {
 
       Serial.print(messageR[i]);

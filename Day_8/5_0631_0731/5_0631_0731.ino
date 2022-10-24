@@ -3,7 +3,7 @@
 #include <Wire.h>
 #define MY_ADDR 8
 char empty[10] = "Token#0#";
-char format[10] = "Token#1#1#";
+char format[10] = "Token#1#2#";
 
 
 char messageR[300];
