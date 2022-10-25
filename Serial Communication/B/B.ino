@@ -4,6 +4,7 @@
 #define MY_ADDR 9
 char empty[10] = "Token#0#";
 char format[10] = "Token#1#2#";
+char temp[300];
 
 
 char messageR[300];
@@ -22,19 +23,31 @@ void setup() {
 
 
 int regex(){
-  for(int i = 0 ;i <= 5 ; i++ ){
-    if(messageR[i] != format[i]){
-      return 0;
-    }
-  }
-  if((messageR[6] == '1' || messageR[6] == '0') && messageR[7] == '#' && (messageR[8] == '1' || messageR[8] == '0' || messageR[8] == '2') &&  messageR[9] == '#' ){
+  if(messageR[0] == '1' || messageR[0] == '2' || messageR[0] == '0' && messageR[1] == ' ')
+  {
     return 1;
   }
-  else{
+  else {
     return 0;
   }
 }
-
+void setMessage(){
+  for(int i = 0; i <= 7 ; i++){
+    temp[i] = format[i];
+  }
+  int k = 10;
+  temp[8] = messageR[0];
+  temp[9] = '#';
+  for(int i = 2 ; i <= lenMessage ; i++){
+    temp[k] = messageR[i];
+    k++;
+  }
+  temp[k] = '\0';
+  Serial.println(temp);
+  for(int i = 0; i<= k ; i++){
+    messageR[i] = temp[i];
+  }
+}
 void receiveEvent(int howMany) {
   if (Wire.available() > 0) {
     int i = 0;
@@ -50,6 +63,9 @@ void receiveEvent(int howMany) {
       if(!regex()){
         setNormal();
       }
+      else {
+        setMessage();
+      }
       // Serial.println("IsEmpty Okay");
       Serial.println(messageR);
     }
@@ -57,6 +73,7 @@ void receiveEvent(int howMany) {
 }
 
 void requestEvent() {
+  
   Wire.write(messageR);
 }
 

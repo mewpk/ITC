@@ -51,6 +51,7 @@ void receiveEvent(int howMany) {
         setNormal();
       }
       // Serial.println("IsEmpty Okay");
+      Serial.println(messageR);
     }
   }
 }
@@ -107,6 +108,7 @@ void setNormal() {
 }
 
 void loop() {
+  
 }
 
 //-------------------------------Master---------------------------//
