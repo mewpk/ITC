@@ -43,7 +43,7 @@ void setMessage(){
     k++;
   }
   temp[k] = '\0';
-  Serial.println(temp);
+  // Serial.println(temp);
   for(int i = 0; i<= k ; i++){
     messageR[i] = temp[i];
   }
@@ -57,6 +57,7 @@ void receiveEvent(int howMany) {
     }
     lenMessage = i;
     messageR[i] = '\0';
+    Serial.println(messageR); //debug
     showMessage();
     if (isEmpty() == 1) {
       getChar();
@@ -67,7 +68,6 @@ void receiveEvent(int howMany) {
         setMessage();
       }
       // Serial.println("IsEmpty Okay");
-      Serial.println(messageR);
     }
   }
 }
